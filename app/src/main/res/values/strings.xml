@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">sepatuku</string>
+    <string name="rupiah">\"Rp. \"</string>
+    <string name="my_name">Didi Prasetyo</string>
+    <string name="my_email">didiprasetyo360@gmail.com</string>
+    <string name="sizes">Sizes</string>
+    <string name="description">Description</string>
+    <string name="favorite">favorite</string>
+    <string name="home">Home</string>
+    <string name="like">Like</string>
+    <string name="about">About</string>
+    <string name="image_shoes">image Shoes</string>
+    <string name="share">share</string>
+    <string name="item_image">item image</string>
+    <string name="back_button">back button</string>
+    <string name="chart_button">chart button</string>
+    <string name="about_button">about button</string>
+</resources>
