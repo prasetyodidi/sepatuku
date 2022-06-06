@@ -124,7 +124,7 @@
                     android:layout_marginEnd="5dp"/>
 
                 <Button
-                    android:id="@+id/btnCShare"
+                    android:id="@+id/btnShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -140,6 +140,7 @@
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"

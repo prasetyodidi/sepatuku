@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_baseline_home_24"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/acction_about"
+        android:id="@+id/action_about"
         android:enabled="true"
         android:title="@string/about"
         android:icon="@drawable/ic_baseline_person_24_grey"

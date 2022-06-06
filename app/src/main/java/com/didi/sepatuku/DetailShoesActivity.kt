@@ -13,7 +13,7 @@ import com.didi.sepatuku.databinding.ActivityDetailShoesBinding
 class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailShoesBinding
 
-    companion object{
+    companion object {
         const val EXTRA_NAME = "extra_name"
         const val EXTRA_PRICE = "extra_price"
         const val EXTRA_DESCRIPTION = "extra_desc"
@@ -46,30 +46,58 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
             .load(photo)
             .into(imgPhoto)
 
-        with(binding){
+        with(binding) {
 
-        tvShoesName.text = name
-        tvShoesPrice.text = "Rp. $price"
-        tvShoesSizes.text = sizes
-        tvShoesDesc.text = desc
-        tvStock.text = "Stock hanya $stock pasang"
+            tvShoesName.text = name
+            tvShoesPrice.text = "Rp. $price"
+            tvShoesSizes.text = sizes
+            tvShoesDesc.text = desc
+            tvStock.text = "Stock hanya $stock pasang"
 
+            btnFavorite.setOnClickListener(this@DetailShoesActivity)
+            btnShare.setOnClickListener(this@DetailShoesActivity)
+        }
+
+        binding.bottomNavigation.setOnItemSelectedListener { menu ->
+            when(menu.itemId){
+                R.id.action_like -> {
+                    Toast.makeText(this, "Like this shoe", Toast.LENGTH_SHORT).show()
+                }
+                R.id.action_home -> {
+                    Intent(this, MainActivity::class.java).also { startActivity(it) }
+                }
+                R.id.action_about -> {
+                    Intent(this, AboutActivity::class.java).also { startActivity(it) }
+                    finish()
+                }
+            }
+            return@setOnItemSelectedListener true
         }
 
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.img_person -> {
-                Toast.makeText(this, "klick icon person ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Click icon person ", Toast.LENGTH_SHORT).show()
                 val moveIntent = Intent(this, AboutActivity::class.java)
                 startActivity(moveIntent)
             }
 
+            R.id.img_chart -> {
+                Toast.makeText(this, "Click icon Chart ", Toast.LENGTH_SHORT).show()
+            }
+
             R.id.img_left -> {
-                Toast.makeText(this, "klick icon left ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Click icon left ", Toast.LENGTH_SHORT).show()
                 val moveIntent = Intent(this, MainActivity::class.java)
                 startActivity(moveIntent)
+            }
+            R.id.btnFavorite -> {
+                Toast.makeText(this, "Click icon favorite ", Toast.LENGTH_SHORT).show()
+            }
+            R.id.btnShare -> {
+                Toast.makeText(this, "Click icon Share ", Toast.LENGTH_SHORT).show()
             }
         }
     }
