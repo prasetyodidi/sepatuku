@@ -25,7 +25,6 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".DetailShoesActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".TestApiActivity" />
     </application>
 
 </manifest>
