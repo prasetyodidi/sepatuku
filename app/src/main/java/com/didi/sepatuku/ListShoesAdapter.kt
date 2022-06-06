@@ -3,11 +3,10 @@ package com.didi.sepatuku
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.didi.sepatuku.databinding.ItemRowShoesBinding
 
 class ListShoesAdapter(private val listShoes: ArrayList<Shoes>) :
     RecyclerView.Adapter<ListShoesAdapter.ListViewHolder>() {
@@ -18,36 +17,37 @@ class ListShoesAdapter(private val listShoes: ArrayList<Shoes>) :
         this.onItemClickCallback = onItemClickCallback
     }
 
-    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvName: TextView = itemView.findViewById(R.id.tv_item_name)
-        var tvPrice: TextView = itemView.findViewById(R.id.tv_item_price)
-        var imgPhoto: ImageView = itemView.findViewById(R.id.img_item_photo)
+    inner class ListViewHolder(private val binding: ItemRowShoesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Shoes) {
+            with(binding) {
+                Glide.with(this@ListViewHolder.itemView.context)
+                    .load(item.photo)
+                    .apply(RequestOptions().override(55, 55))
+                    .into(imgItemPhoto)
+
+                tvItemName.text = item.name
+                tvItemPrice.text = "Rp. ${item.price}"
+                this@ListViewHolder.itemView.setOnClickListener {
+                    onItemClickCallback.onItemClicked(listShoes[this@ListViewHolder.bindingAdapterPosition])
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_row_shoes, viewGroup, false)
-        return ListViewHolder(view)
+        val binding =
+            ItemRowShoesBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        return ListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val hero = listShoes[position]
-
-        Glide.with(holder.itemView.context)
-            .load(hero.photo)
-            .apply(RequestOptions().override(55, 55))
-            .into(holder.imgPhoto)
-
-        holder.tvName.text = hero.name
-        holder.tvPrice.text = "Rp. ${hero.price}"
-        holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(listShoes[holder.bindingAdapterPosition])
-        }
+        holder.bind(listShoes[position])
     }
 
-    override fun getItemCount(): Int {
-        return listShoes.size
-    }
+    override fun getItemCount(): Int = listShoes.size
 
     interface OnItemClickCallback {
         fun onItemClicked(data: Shoes)

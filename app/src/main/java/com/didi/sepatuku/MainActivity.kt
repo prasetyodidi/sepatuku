@@ -8,16 +8,18 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.didi.sepatuku.databinding.ActivityAboutBinding
+import com.didi.sepatuku.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-    private lateinit var rvShoes: RecyclerView
+    private lateinit var binding: ActivityMainBinding
     private var list: ArrayList<Shoes> = arrayListOf()
     private var shoesData = ShoesData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val imgLeft: ImageView = findViewById(R.id.img_left)
         imgLeft.setOnClickListener(this)
@@ -25,11 +27,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val imgAbout: ImageView = findViewById(R.id.img_person)
         imgAbout.setOnClickListener(this)
 
-        rvShoes = findViewById(R.id.rv_shoes)
-        rvShoes.setHasFixedSize(true)
+        binding.rvShoes.setHasFixedSize(true)
 
         list.addAll(shoesData.listData)
         showRecyclerList()
+
+
     }
 
     override fun onClick(v: View?) {
@@ -48,9 +51,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showRecyclerList(){
-        rvShoes.layoutManager = LinearLayoutManager(this)
+        binding.rvShoes.layoutManager = LinearLayoutManager(this)
         val listShoesAdapter = ListShoesAdapter(list)
-        rvShoes.adapter = listShoesAdapter
+        binding.rvShoes.adapter = listShoesAdapter
 
         listShoesAdapter.setOnItemClickCallback(object: ListShoesAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Shoes) {

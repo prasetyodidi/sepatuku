@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import com.didi.sepatuku.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var binding: ActivityAboutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val imgLeft: ImageView = findViewById(R.id.img_left)
         imgLeft.setOnClickListener(this)
