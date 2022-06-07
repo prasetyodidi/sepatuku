@@ -40,25 +40,25 @@ class ShoesData {
     val listData: ArrayList<Shoes>
         get() {
             val list = ArrayList<Shoes>()
-            for (postition in shoesName.indices){
+            for (position in shoesName.indices){
                 val shoes = Shoes()
-                shoes.name = shoesName[postition]
-                shoes.photo= shoesImage[postition]
-                shoes.price = if (shoesName[postition].contains("low")){
+                shoes.name = shoesName[position]
+                shoes.photo= shoesImage[position]
+                shoes.price = if (shoesName[position].contains("low")){
                     239000
                 }else{
                     279000
                 }
-                shoes.sizes = if (postition % 3 == 1){
+                shoes.sizes = if (position % 3 == 1){
                     listOf(36, 37, 38, 39)
                 }else {
                     listOf(40, 41, 42, 43)
                 }
                 when {
-                    shoesName[postition].contains("equip") -> {
+                    shoesName[position].contains("equip") -> {
                         shoes.description = description["equip"].toString()
                     }
-                    shoesName[postition].contains("ivan") -> {
+                    shoesName[position].contains("ivan") -> {
                         shoes.description = description["ivan"].toString()
                     }
                     else -> {
