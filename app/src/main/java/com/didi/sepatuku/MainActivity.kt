@@ -7,7 +7,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.didi.sepatuku.activity.AboutActivity
+import com.didi.sepatuku.activity.DetailShoesActivity
 import com.didi.sepatuku.databinding.ActivityMainBinding
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
@@ -18,6 +21,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Timber.plant(Timber.DebugTree())
 
         val imgLeft: ImageView = findViewById(R.id.img_left)
         imgLeft.setOnClickListener(this)

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Shoes(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    var id: Int = 0,
     @ColumnInfo(name = "name") var name: String?,
     @ColumnInfo(name = "desc") var price: Int = 0,
     @ColumnInfo(name = "img") var img: Int = 0

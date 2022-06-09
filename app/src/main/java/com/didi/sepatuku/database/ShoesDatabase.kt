@@ -15,14 +15,15 @@ abstract class ShoesDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ShoesDatabase? = null
 
+        @JvmStatic
         fun getInstance(context: Context): ShoesDatabase {
             if (INSTANCE == null) {
                 synchronized(ShoesDatabase::class.java) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
-                        ShoesDatabase::class.java, EXTRA_TABLE_NAME
+                        ShoesDatabase::class.java,
+                        EXTRA_TABLE_NAME
                     ).build()
-
                 }
             }
             return INSTANCE as ShoesDatabase
