@@ -1,9 +1,11 @@
-package com.didi.sepatuku
+package com.didi.sepatuku.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.didi.sepatuku.MainActivity
+import com.didi.sepatuku.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
