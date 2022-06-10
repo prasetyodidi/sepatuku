@@ -11,6 +11,7 @@ import com.didi.sepatuku.activity.AboutActivity
 import com.didi.sepatuku.activity.DetailShoesActivity
 import com.didi.sepatuku.databinding.ActivityMainBinding
 import timber.log.Timber
+import com.didi.sepatuku.database.Shoes
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
@@ -32,8 +33,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.rvShoes.setHasFixedSize(true)
 
-        list.addAll(shoesData.listData)
+        val lists = convert(shoesData.listData)
+
+        list.addAll(lists)
         showRecyclerList()
+    }
+
+    private fun convert(list: List<com.didi.sepatuku.Shoes>): List<Shoes>{
+        val result = ArrayList<Shoes>()
+        list.forEach {
+            val shoes = Shoes(name = it.name, price = it.price, img = it.photo)
+            result.add(shoes)
+        }
+        return result
     }
 
     override fun onClick(v: View?) {
@@ -68,10 +80,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         with(moveWithDataIntent) {
             putExtra(DetailShoesActivity.EXTRA_NAME, shoes.name)
             putExtra(DetailShoesActivity.EXTRA_PRICE, shoes.price)
-            putExtra(DetailShoesActivity.EXTRA_PHOTO, shoes.photo)
-            putExtra(DetailShoesActivity.EXTRA_DESCRIPTION, shoes.description)
-            putExtra(DetailShoesActivity.EXTRA_SIZES, shoes.sizes.toString())
-            putExtra(DetailShoesActivity.EXTRA_STOCK, shoes.stock)
         }
         startActivity(moveWithDataIntent)
     }

@@ -10,9 +10,9 @@ import com.didi.sepatuku.database.ShoesDatabase
 import com.didi.sepatuku.repository.ShoesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.async
 
-class FavoriteViewModel(application: Application): AndroidViewModel(application) {
+class FavoriteViewModel(application: Application) : AndroidViewModel(application) {
 
     private val crScope = CoroutineScope(Dispatchers.IO)
     private val repository: ShoesRepository
@@ -27,13 +27,12 @@ class FavoriteViewModel(application: Application): AndroidViewModel(application)
     init {
         shoesDao = ShoesDatabase.getInstance(application).shoesDao()
         repository = ShoesRepository(shoesDao)
+
     }
 
-    suspend fun getAll(){
-        _listItems.value = repository.getAll()
-    }
+    fun getListShoes() = repository.getAll()
 
-    fun insert(shoes: Shoes){
+    fun insert(shoes: Shoes) {
         repository.insert(shoes)
     }
 }

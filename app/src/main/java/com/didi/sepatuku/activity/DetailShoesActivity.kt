@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.didi.sepatuku.MainActivity
 import com.didi.sepatuku.R
+import com.didi.sepatuku.ShoesData
 import com.didi.sepatuku.database.Shoes
 import com.didi.sepatuku.databinding.ActivityDetailShoesBinding
 import com.didi.sepatuku.viewmodel.DetailShoesViewModel
@@ -24,6 +25,8 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var shoes: Shoes
     private lateinit var detailShoesViewModel: DetailShoesViewModel
     private lateinit var favoriteViewModel: FavoriteViewModel
+    private var shoesData = ShoesData()
+
 
     companion object {
         const val EXTRA_NAME = "extra_name"
@@ -61,26 +64,22 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
 
 
         val name = intent.getStringExtra(EXTRA_NAME)
-        val price = intent.getIntExtra(EXTRA_PRICE, 0)
-        val desc = intent.getStringExtra(EXTRA_DESCRIPTION)
-        val photo = intent.getIntExtra(EXTRA_PHOTO, 0)
-        val sizes = intent.getStringExtra(EXTRA_SIZES)
-        val stock = intent.getIntExtra(EXTRA_STOCK, 0)
+        val shoesDetail = shoesData.listData.first { it.name.equals(name) }
 
         val imgPhoto: ImageView = findViewById(R.id.img_item_photo_detail)
         val tvStock: TextView = findViewById(R.id.tv_shoes_stock)
 
         Glide.with(this)
-            .load(photo)
+            .load(shoesDetail.photo)
             .into(imgPhoto)
 
         with(binding) {
 
             tvShoesName.text = name
-            tvShoesPrice.text = "Rp. $price"
-            tvShoesSizes.text = sizes
-            tvShoesDesc.text = desc
-            tvStock.text = "Stock hanya $stock pasang"
+            tvShoesPrice.text = "Rp. ${shoesDetail.price}"
+            tvShoesSizes.text = shoesDetail.sizes.toString()
+            tvShoesDesc.text = shoesDetail.description
+            tvStock.text = "Stock hanya ${shoesDetail.stock} pasang"
 
             btnFavorite.setOnClickListener(this@DetailShoesActivity)
             btnShare.setOnClickListener(this@DetailShoesActivity)
@@ -128,7 +127,6 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
                     Timber.i("${Thread.currentThread()}")
                     addFavorite(shoes)
                 }
-                favoriteViewModel.insert(shoes)
             }
             R.id.btnShare -> {
                 Toast.makeText(this, "Click icon Share ", Toast.LENGTH_SHORT).show()

@@ -1,5 +1,6 @@
 package com.didi.sepatuku.repository
 
+import androidx.lifecycle.LiveData
 import com.didi.sepatuku.database.Shoes
 import com.didi.sepatuku.database.ShoesDao
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +20,7 @@ class ShoesRepository(private val shoesDao: ShoesDao) {
         return shoesDao.findByName(name)
     }
 
-    fun getAll(): List<Shoes>{
+    fun getAll(): LiveData<List<Shoes>>{
         return shoesDao.getAll()
     }
 }

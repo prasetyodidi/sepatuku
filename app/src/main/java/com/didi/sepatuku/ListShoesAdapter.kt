@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.didi.sepatuku.databinding.ItemRowShoesBinding
+import com.didi.sepatuku.database.Shoes
 
 class ListShoesAdapter(private val listShoes: ArrayList<Shoes>) :
     RecyclerView.Adapter<ListShoesAdapter.ListViewHolder>() {
@@ -22,7 +23,7 @@ class ListShoesAdapter(private val listShoes: ArrayList<Shoes>) :
         fun bind(item: Shoes) {
             with(binding) {
                 Glide.with(this@ListViewHolder.itemView.context)
-                    .load(item.photo)
+                    .load(item.img)
                     .apply(RequestOptions().override(55, 55))
                     .into(imgItemPhoto)
 
@@ -36,10 +37,7 @@ class ListShoesAdapter(private val listShoes: ArrayList<Shoes>) :
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_row_shoes, viewGroup, false)
-        val binding =
-            ItemRowShoesBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        val binding = ItemRowShoesBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
     }
 
