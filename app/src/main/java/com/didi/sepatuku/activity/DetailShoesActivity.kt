@@ -19,23 +19,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import com.didi.sepatuku.Shoes as ShoesDetail
 
 class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailShoesBinding
-    lateinit var shoes: Shoes
     private lateinit var detailShoesViewModel: DetailShoesViewModel
     private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var shoesDetail: ShoesDetail
     private var shoesData = ShoesData()
-
-
-    companion object {
-        const val EXTRA_NAME = "extra_name"
-        const val EXTRA_PRICE = "extra_price"
-        const val EXTRA_DESCRIPTION = "extra_desc"
-        const val EXTRA_SIZES = "extra_sizes"
-        const val EXTRA_PHOTO = "extra_photo"
-        const val EXTRA_STOCK = "extra_stock"
-    }
+    private var shoes: Shoes? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,24 +42,12 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
         imgLeft.setOnClickListener(this)
         imgPerson.setOnClickListener(this)
 
-        shoes = Shoes(
-            name = intent.getStringExtra(EXTRA_NAME),
-            price = intent.getIntExtra(EXTRA_PRICE, 0),
-            img = intent.getIntExtra(EXTRA_PHOTO, 0)
-        )
-
-        with(shoes) {
-            name = intent.getStringExtra(EXTRA_NAME)
-            price = intent.getIntExtra(EXTRA_PRICE, 0)
-            img = intent.getIntExtra(EXTRA_PHOTO, 0)
-        }
-
-
-        val name = intent.getStringExtra(EXTRA_NAME)
-        val shoesDetail = shoesData.listData.first { it.name.equals(name) }
-
         val imgPhoto: ImageView = findViewById(R.id.img_item_photo_detail)
         val tvStock: TextView = findViewById(R.id.tv_shoes_stock)
+
+        val name = intent.getStringExtra(EXTRA_NAME)
+        shoesDetail = shoesData.listData.first { it.name.equals(name) }
+        setShoes(shoesDetail)
 
         Glide.with(this)
             .load(shoesDetail.photo)
@@ -75,7 +55,7 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
 
         with(binding) {
 
-            tvShoesName.text = name
+            tvShoesName.text = shoesDetail.name
             tvShoesPrice.text = "Rp. ${shoesDetail.price}"
             tvShoesSizes.text = shoesDetail.sizes.toString()
             tvShoesDesc.text = shoesDetail.description
@@ -125,7 +105,7 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, "Click icon favorite ", Toast.LENGTH_SHORT).show()
                 CoroutineScope(Dispatchers.IO).launch {
                     Timber.i("${Thread.currentThread()}")
-                    addFavorite(shoes)
+                    shoes?.let { addFavorite(it) }
                 }
             }
             R.id.btnShare -> {
@@ -134,7 +114,17 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun setShoes(detailShoes: ShoesDetail){
+        shoes?.name = detailShoes.name
+        shoes?.price = detailShoes.price
+        shoes?.img = detailShoes.photo
+    }
+
     private fun addFavorite(shoes: Shoes) {
         favoriteViewModel.insert(shoes)
+    }
+
+    companion object {
+        const val EXTRA_NAME = "extra_name"
     }
 }

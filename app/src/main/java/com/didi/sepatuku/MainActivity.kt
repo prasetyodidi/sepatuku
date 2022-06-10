@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val moveWithDataIntent = Intent(this, DetailShoesActivity::class.java)
         with(moveWithDataIntent) {
             putExtra(DetailShoesActivity.EXTRA_NAME, shoes.name)
-            putExtra(DetailShoesActivity.EXTRA_PRICE, shoes.price)
         }
         startActivity(moveWithDataIntent)
     }
