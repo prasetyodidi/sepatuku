@@ -74,7 +74,7 @@ class DetailShoesActivity : AppCompatActivity(), View.OnClickListener {
                 R.id.action_home -> {
                     Intent(this, MainActivity::class.java).also { startActivity(it) }
                 }
-                R.id.action_detail_shoes -> {
+                R.id.action_chart -> {
                     Intent(this, AboutActivity::class.java).also { startActivity(it) }
                     finish()
                 }
