@@ -1,22 +1,27 @@
 package com.didi.sepatuku
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import com.bumptech.glide.Glide
 import com.didi.sepatuku.activity.AboutActivity
-import com.didi.sepatuku.activity.DetailShoesActivity
-import com.didi.sepatuku.databinding.ActivityMainBinding
-import timber.log.Timber
 import com.didi.sepatuku.database.Shoes
+import com.didi.sepatuku.databinding.ActivityMainBinding
+import com.didi.sepatuku.fragment.ChartFragment
+import com.didi.sepatuku.fragment.FavoriteFragment
+import com.didi.sepatuku.fragment.MainFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
-    private var list: ArrayList<Shoes> = arrayListOf()
-    private var shoesData = ShoesData()
+    private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,27 +30,71 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         Timber.plant(Timber.DebugTree())
 
-        val imgLeft: ImageView = findViewById(R.id.img_left)
-        imgLeft.setOnClickListener(this)
-
         val imgAbout: ImageView = findViewById(R.id.img_person)
         imgAbout.setOnClickListener(this)
 
-        binding.rvShoes.setHasFixedSize(true)
+        binding.bottomNavigation.selectedItemId = R.id.action_home
+        fragment = MainFragment.newInstance()
+        changeFragment(fragment)
+        binding.bottomNavigation.setOnItemSelectedListener { menu ->
+            when (menu.itemId) {
+                R.id.action_like -> {
+                    fragment = FavoriteFragment.newInstance()
+                }
+                R.id.action_home -> {
+                    fragment = MainFragment.newInstance()
+                }
+                R.id.action_chart -> {
+                    fragment = ChartFragment.newInstance()
+                }
+            }
 
-        val lists = convert(shoesData.listData)
+            return@setOnItemSelectedListener changeFragment(fragment)
+        }
 
-        list.addAll(lists)
-        showRecyclerList()
     }
 
-    private fun convert(list: List<com.didi.sepatuku.Shoes>): List<Shoes>{
-        val result = ArrayList<Shoes>()
-        list.forEach {
-            val shoes = Shoes(name = it.name, price = it.price, img = it.photo)
-            result.add(shoes)
+    private fun addChip(value: Int): Chip{
+        val chip = Chip(this)
+        chip.text = value.toString()
+        return chip
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun showBottomSheet(stateParam: Boolean, shoes: Shoes, sizes: List<Int> = listOf(0)) {
+        var bottomSheet: BottomSheetBehavior<*>
+        Timber.d("show bottom sheet")
+        with(binding) {
+            bottomSheet = BottomSheetBehavior.from(cvBottomSheet)
+            if (stateParam) {
+                cvBottomSheet.visibility = View.VISIBLE
+                bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
+                Glide.with(this@MainActivity)
+                    .load(shoes.img)
+                    .into(imgItem)
+                textPrice.text = "Rp ${shoes.price}"
+                textSize.text = sizes[0].toString()
+                for (i in sizes){
+                    chipsTypes.addView(addChip(i))
+                }
+                chipsTypes.setOnCheckedStateChangeListener { group, checkedIds ->
+                    Timber.d("checkedId: $checkedIds")
+                    chipsTypes.getChildAt(checkedIds[0])
+                }
+            } else {
+                bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            }
         }
-        return result
+    }
+
+    private fun changeFragment(f: Fragment?): Boolean {
+        if (f != null) {
+            supportFragmentManager.commit {
+                replace(R.id.frame_container, f)
+            }
+            return true
+        }
+        return false
     }
 
     override fun onClick(v: View?) {
@@ -53,33 +102,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.img_person -> {
                 Intent(this, AboutActivity::class.java).also { startActivity(it) }
             }
-            R.id.img_left -> {
-                Toast.makeText(this, "Click icon left ", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            R.id.img_chart -> {
-                Toast.makeText(this, "Click icon Chart ", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
-    private fun showRecyclerList() {
-        binding.rvShoes.layoutManager = LinearLayoutManager(this)
-        val listShoesAdapter = ListShoesAdapter(list)
-        binding.rvShoes.adapter = listShoesAdapter
-
-        listShoesAdapter.setOnItemClickCallback(object : ListShoesAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: Shoes) {
-                showSelectedShoes(data)
-            }
-        })
-    }
-
-    private fun showSelectedShoes(shoes: Shoes) {
-        val moveWithDataIntent = Intent(this, DetailShoesActivity::class.java)
-        with(moveWithDataIntent) {
-            putExtra(DetailShoesActivity.EXTRA_NAME, shoes.name)
-        }
-        startActivity(moveWithDataIntent)
-    }
 }
