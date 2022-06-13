@@ -1,7 +1,7 @@
-package com.didi.sepatuku
+package com.didi.sepatuku.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -20,6 +20,7 @@ class ListShoesAdapter(private val listShoes: ArrayList<Shoes>) :
 
     inner class ListViewHolder(private val binding: ItemRowShoesBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(item: Shoes) {
             with(binding) {
                 Glide.with(this@ListViewHolder.itemView.context)

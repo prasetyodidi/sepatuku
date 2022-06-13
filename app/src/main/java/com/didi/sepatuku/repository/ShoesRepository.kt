@@ -17,11 +17,9 @@ class ShoesRepository(private val shoesDao: ShoesDao) {
         scope.launch {
             try {
                 shoesDao.insertAll(*shoes)
+                Timber.d("success")
             } catch (e: SQLException) {
-                withContext(Dispatchers.Main){
-
-                }
-                Timber.d(e)
+                Timber.d("sql exception $e")
             }
         }
     }
