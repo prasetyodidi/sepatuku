@@ -1,11 +1,11 @@
 package com.didi.sepatuku.model
 
-data class UserDetail(
-    val desc: String,
+data class ShoeDetail(
     val id: String,
-    val image_url: String,
+    val desc: String,
     val name: String,
     val price: Int,
+    val stock: Int,
     val sizes: List<Int>,
-    val stock: Int
+    val image_url: String
 )
