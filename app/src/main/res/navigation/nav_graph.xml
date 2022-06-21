@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.didi.sepatuku.fragment.MainFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_nav_home_to_nav_favorite"
+            app:destination="@id/nav_favorite" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_shopping_cart"
+            app:destination="@id/nav_shopping_cart" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_about"
+            app:destination="@id/nav_about" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_detail_shoe"
+            app:destination="@id/nav_detail_shoe" />
+        <argument
+            android:name="detailShoe"
+            android:defaultValue="@null"
+            app:argType="com.didi.sepatuku.model.Shoe"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_detail_shoe"
+        android:name="com.didi.sepatuku.fragment.DetailShoesFragment"
+        android:label="fragment_detail_shoe"
+        tools:layout="@layout/fragment_detail_shoes">
+        <argument
+            android:name="detailShoe"
+            app:argType="com.didi.sepatuku.model.Shoe" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_shopping_cart"
+        android:name="com.didi.sepatuku.fragment.ShoppingCartFragment"
+        android:label="fragment_shopping_cart"
+        tools:layout="@layout/fragment_shopping_cart">
+        <action
+            android:id="@+id/action_nav_shopping_cart_to_nav_detail_shoe"
+            app:destination="@id/nav_detail_shoe" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_favorite"
+        android:name="com.didi.sepatuku.fragment.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_nav_favorite_to_nav_detail_shoe"
+            app:destination="@id/nav_detail_shoe" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.didi.sepatuku.fragment.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+
+</navigation>
