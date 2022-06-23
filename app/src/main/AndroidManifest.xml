@@ -17,9 +17,6 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         tools:targetApi="s">
         <activity
-            android:name=".activity.FavoriteActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashScreenStyle">
@@ -29,8 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.DetailShoesActivity" />
         <activity android:name=".MainActivity" />
     </application>
 
