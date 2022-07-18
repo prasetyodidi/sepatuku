@@ -3,21 +3,50 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.106" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.125" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1275" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_baseline_keyboard_backspace_24_black.xml" value="0.1" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.1" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_outline_cancel_24.xml" value="0.1" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/ic_shoes.xml" value="0.1" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/my_outline_button.xml" value="0.133" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/my_primary_outline_button.xml" value="0.125" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/my_secondary_outline_button.xml" value="0.125" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/shoe_sneaker.xml" value="0.1" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/splash_brand_logo.xml" value="0.1" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/drawable/state_list.xml" value="0.18995433789954339" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout-v26/item_row_shoes.xml" value="0.13333333333333333" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout-v26/item_shoe.xml" value="0.22" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout-v26/item_shoes.xml" value="0.22" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/activity_about.xml" value="0.1" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/activity_detail_shoes.xml" value="0.22" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/activity_favorite.xml" value="0.1" />
-        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/activity_test_api.xml" value="0.1" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_about.xml" value="0.22" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_blank.xml" value="0.1" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.16666666666666666" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_chart.xml" value="0.15601851851851853" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_delete_confirm.xml" value="0.15601851851851853" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_detail_cart_dialog.xml" value="0.22" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_detail_shoes.xml" value="0.16666666666666666" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_favorite.xml" value="0.15601851851851853" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.15601851851851853" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_item_list_dialog_list_dialog_item.xml" value="0.15601851851851853" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_like.xml" value="0.14351851851851852" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_main.xml" value="0.15601851851851853" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/fragment_shopping_cart.xml" value="0.16666666666666666" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/item_posts.xml" value="0.15601851851851853" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/item_shopping_cart.xml" value="0.22" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/item_shopping_chart.xml" value="0.3333333333333333" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/layout/toolbar.xml" value="0.17824074074074073" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/menu/menu_action_bar.xml" value="0.15601851851851853" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/menu/menu_bottom_nav_view.xml" value="0.17824074074074073" />
+        <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/menu/menu_top_nav.xml" value="0.15601851851851853" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18995433789954339" />
       </map>
     </option>
