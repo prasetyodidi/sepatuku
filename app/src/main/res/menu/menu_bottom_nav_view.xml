@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_baseline_home_24"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/action_chart"
+        android:id="@+id/action_cart"
         android:title="@string/about"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         app:showAsAction="ifRoom"/>
