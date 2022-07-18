@@ -1,4 +1,4 @@
-package com.didi.sepatuku.activity
+package com.didi.sepatuku.presentation.splash_screen
 
 import android.content.Intent
 import android.os.Bundle
