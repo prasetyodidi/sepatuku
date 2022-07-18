@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sepatuku</string>
+    <string name="app_name">Sepatuku</string>
     <string name="rupiah">\"Rp. \"</string>
     <string name="my_name">Didi Prasetyo</string>
     <string name="my_email">didiprasetyo360@gmail.com</string>
@@ -15,4 +15,11 @@
     <string name="back_button">back button</string>
     <string name="chart_button">chart button</string>
     <string name="about_button">about button</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="size">Size</string>
+    <string name="amount">Amount</string>
+    <string name="cart">cart</string>
+    <string name="stock">stock</string>
 </resources>
