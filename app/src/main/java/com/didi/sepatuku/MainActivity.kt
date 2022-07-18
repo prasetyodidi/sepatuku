@@ -1,20 +1,21 @@
 package com.didi.sepatuku
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import com.didi.sepatuku.activity.AboutActivity
 import com.didi.sepatuku.databinding.ActivityMainBinding
-import com.didi.sepatuku.fragment.ChartFragment
-import com.didi.sepatuku.fragment.FavoriteFragment
-import com.didi.sepatuku.fragment.MainFragment
+import com.didi.sepatuku.presentation.about.AboutFragment
+import com.didi.sepatuku.presentation.shoe.HomeFragment
+import com.didi.sepatuku.presentation.shoe_favorite.FavoriteFragment
+import com.didi.sepatuku.presentation.shopping_cart.ShoppingCartFragment
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var fragment: Fragment
 
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Timber.plant(Timber.DebugTree())
 
         binding.bottomNavigation.selectedItemId = R.id.action_home
-        fragment = MainFragment.newInstance()
+        fragment = HomeFragment.newInstance()
         changeFragment(fragment)
         binding.bottomNavigation.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
@@ -34,10 +35,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     fragment = FavoriteFragment.newInstance()
                 }
                 R.id.action_home -> {
-                    fragment = MainFragment.newInstance()
+                    fragment = HomeFragment.newInstance()
                 }
-                R.id.action_chart -> {
-                    fragment = ChartFragment.newInstance()
+                R.id.action_cart -> {
+                    fragment = ShoppingCartFragment.newInstance()
                 }
             }
 
@@ -51,22 +52,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             supportFragmentManager.commit {
                 replace(R.id.frame_container, f)
             }
+            val name = f.javaClass
+            Timber.d("change $name")
             return true
         }
         return false
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.img_person -> {
-                Intent(this, AboutActivity::class.java).also { startActivity(it) }
-            }
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_action_bar, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_about -> {
+                val f = AboutFragment.newInstance()
+                changeFragment(f)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
