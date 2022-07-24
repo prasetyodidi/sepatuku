@@ -11,10 +11,8 @@ import com.didi.sepatuku.presentation.about.AboutFragment
 import com.didi.sepatuku.presentation.shoe.HomeFragment
 import com.didi.sepatuku.presentation.shoe_favorite.FavoriteFragment
 import com.didi.sepatuku.presentation.shopping_cart.ShoppingCartFragment
-import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var fragment: Fragment

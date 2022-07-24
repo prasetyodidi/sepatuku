@@ -1,15 +1,13 @@
 package com.didi.sepatuku.presentation.shoe
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.didi.sepatuku.core.util.Resource
 import com.didi.sepatuku.domain.use_case.ShoeUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
-import javax.inject.Inject
 
-@HiltViewModel
-class ShoeViewModel @Inject constructor(
+class ShoeViewModel constructor(
     private val shoeUseCase: ShoeUseCase
 ) : ViewModel() {
 

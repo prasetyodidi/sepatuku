@@ -6,13 +6,10 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.didi.sepatuku.core.util.Resource
 import com.didi.sepatuku.domain.model.CartItem
-import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.use_case.ShoppingCartUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
 data class ShoppingCartUiState(
     val isLoading: Boolean = false,
@@ -20,8 +17,7 @@ data class ShoppingCartUiState(
     val items: List<CartItem> = emptyList()
 )
 
-@HiltViewModel
-class ShoppingCartViewModel @Inject constructor(
+class ShoppingCartViewModel constructor(
     private val shoppingCartUseCase: ShoppingCartUseCase
 ) : ViewModel() {
 
@@ -72,7 +68,7 @@ class ShoppingCartViewModel @Inject constructor(
     fun updateAmount(item: CartItem, amount: Int){
         viewModelScope.launch {
             if (amount >= 1){
-                Timber.d("view model update amount ${item.amount} $amount")
+                Timber.d("viewModel onUpdate amount: ${item.amount} $amount")
                 shoppingCartUseCase.updateShoppingCartItem(item.copy(amount = amount))
                 getData()
             }

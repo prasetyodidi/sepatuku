@@ -5,10 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.didi.sepatuku.core.util.Resource
 import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.use_case.FavoriteUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
-import javax.inject.Inject
 
 data class FavoriteUIState(
     val isLoading: Boolean = false,
@@ -16,8 +14,7 @@ data class FavoriteUIState(
     val message: String? = null
 )
 
-@HiltViewModel
-class FavoriteViewModel @Inject constructor(
+class FavoriteViewModel constructor(
     private val favoriteUseCase: FavoriteUseCase
 ): ViewModel(){
     private var _state: MutableStateFlow<FavoriteUIState> = MutableStateFlow(FavoriteUIState())
