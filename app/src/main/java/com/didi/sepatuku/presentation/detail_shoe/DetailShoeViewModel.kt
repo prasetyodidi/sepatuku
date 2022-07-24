@@ -3,21 +3,16 @@ package com.didi.sepatuku.presentation.detail_shoe
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.didi.sepatuku.core.util.Resource
-import com.didi.sepatuku.data.local.entity.ShoeEntity
 import com.didi.sepatuku.data.local.entity.ShoppingCartEntity
-import com.didi.sepatuku.domain.model.CartItem
 import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.use_case.FavoriteUseCase
 import com.didi.sepatuku.domain.use_case.ShoeUseCase
 import com.didi.sepatuku.domain.use_case.ShoppingCartUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.sql.SQLException
-import javax.inject.Inject
 
-@HiltViewModel
-class DetailShoeViewModel @Inject constructor(
+class DetailShoeViewModel constructor(
     private val shoeUseCase: ShoeUseCase,
     private val favoriteUseCase: FavoriteUseCase,
     private val shoppingCartUseCase: ShoppingCartUseCase

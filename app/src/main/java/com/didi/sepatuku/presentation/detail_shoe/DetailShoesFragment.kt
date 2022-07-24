@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -17,18 +14,17 @@ import com.didi.sepatuku.R
 import com.didi.sepatuku.databinding.FragmentDetailShoesBinding
 import com.didi.sepatuku.domain.model.DetailShoe
 import com.didi.sepatuku.presentation.shoe.HomeFragment
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class DetailShoesFragment : Fragment() {
     private var _binding: FragmentDetailShoesBinding? = null
     private val binding get() = _binding
-    private val viewModel: DetailShoeViewModel by activityViewModels()
+    private val viewModel: DetailShoeViewModel by viewModel()
     private lateinit var name: String
 
     override fun onCreate(savedInstanceState: Bundle?) {

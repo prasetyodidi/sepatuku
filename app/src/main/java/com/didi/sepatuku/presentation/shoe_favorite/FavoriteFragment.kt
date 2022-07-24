@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,17 +17,16 @@ import com.didi.sepatuku.presentation.ShoesAdapter
 import com.didi.sepatuku.presentation.detail_shoe.DetailShoesFragment
 import com.didi.sepatuku.presentation.shoe.HomeFragment
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding
-    private val viewModel: FavoriteViewModel by viewModels()
+    private val viewModel: FavoriteViewModel by viewModel()
     private lateinit var adapter: ShoesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
