@@ -19,6 +19,6 @@ class MainTest {
 
     @Test
     fun clickItem(){
-        onView(withId(R.id.img_person)).perform(click())
+        onView(withId(R.id.img_my_photo)).perform(click())
     }
 }

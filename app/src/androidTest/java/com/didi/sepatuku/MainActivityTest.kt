@@ -1,21 +1,26 @@
 package com.didi.sepatuku
 
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.PerformException
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.espresso.contrib.RecyclerViewActions
 import com.didi.sepatuku.presentation.ShoesAdapter
-import org.junit.Rule
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class MainActivityTest{
 
-    @Rule
-    val activityScenarioRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
+//    @Rule
+//    val activityScenarioRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
+
+    @BeforeEach
+    fun setUp(){
+        ActivityScenario.launch(MainActivity::class.java)
+    }
 
     @Test
     fun testClickItemNotFound() {
