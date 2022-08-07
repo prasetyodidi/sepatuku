@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs'
+    id 'de.mannodermaus.android-junit5'
 }
 
 android {
@@ -44,15 +45,15 @@ android {
 dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.5.0")
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion")
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation "androidx.fragment:fragment-ktx:1.5.0"
+    implementation "androidx.fragment:fragment-ktx:1.5.1"
 
     // Espreso
     implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
@@ -69,9 +70,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
 
     // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$navigationVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$navigationVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$navigationVersion"
 
     // Chucker
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
@@ -89,15 +90,26 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor'
 
     // Room
-    kapt 'androidx.room:room-compiler:2.4.2'
-    implementation 'androidx.room:room-runtime:2.4.2'
-    implementation "androidx.room:room-ktx:2.4.2"
+    kapt 'androidx.room:room-compiler:2.4.3'
+    implementation 'androidx.room:room-runtime:2.4.3'
+    implementation "androidx.room:room-ktx:2.4.3"
 
     implementation "io.insert-koin:koin-android:$koinVersion"
 
     // Koin Test
     testImplementation "io.insert-koin:koin-test:$koinVersion"
     testImplementation "io.insert-koin:koin-test-junit4:$koinVersion"
+
+    // (Required) Writing and executing Unit Tests on the JUnit Platform
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+
+    // (Optional) If you need "Parameterized Tests"
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+
+    // (Optional) If you also have JUnit 4-based tests
+    testImplementation("junit:junit:4.13.2")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
 
     // Local unit test
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
@@ -115,7 +127,7 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.5.1'
     testImplementation 'org.mockito:mockito-inline:3.6.0'
-    androidTestImplementation("androidx.navigation:navigation-testing:2.5.0")
+    androidTestImplementation("androidx.navigation:navigation-testing:$navigationVersion")
 
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
