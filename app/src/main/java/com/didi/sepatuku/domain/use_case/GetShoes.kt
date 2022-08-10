@@ -4,7 +4,6 @@ import com.didi.sepatuku.core.util.Resource
 import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.repository.ShoeRepository
 import kotlinx.coroutines.flow.Flow
-import timber.log.Timber
 
 class GetShoes(
     private val repository: ShoeRepository

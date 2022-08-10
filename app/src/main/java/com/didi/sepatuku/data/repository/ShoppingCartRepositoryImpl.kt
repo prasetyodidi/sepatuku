@@ -5,9 +5,10 @@ import com.didi.sepatuku.data.local.dao.ShoppingCartDao
 import com.didi.sepatuku.data.local.entity.ShoppingCartEntity
 import com.didi.sepatuku.domain.model.CartItem
 import com.didi.sepatuku.domain.repository.ShoppingCartRepository
-import kotlinx.coroutines.flow.*
-import timber.log.Timber
-import java.sql.SQLException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 
 class ShoppingCartRepositoryImpl(
     private val dao: ShoppingCartDao
