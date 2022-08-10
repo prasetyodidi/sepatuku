@@ -8,8 +8,8 @@ import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.use_case.FavoriteUseCase
 import com.didi.sepatuku.domain.use_case.ShoeUseCase
 import com.didi.sepatuku.domain.use_case.ShoppingCartUseCase
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import java.sql.SQLException
 
 class DetailShoeViewModel constructor(
@@ -18,36 +18,41 @@ class DetailShoeViewModel constructor(
     private val shoppingCartUseCase: ShoppingCartUseCase
 ) : ViewModel() {
 
-    private val name: StateFlow<String> = MutableStateFlow("")
-
     private var _state: MutableStateFlow<DetailShoeUIState> = MutableStateFlow(DetailShoeUIState())
     val state: StateFlow<DetailShoeUIState> = _state.asStateFlow()
 
+    private val scope = CoroutineScope(Dispatchers.IO)
+    private var searchJob: Job? = null
+
     fun getDetailShoe(name: String) {
-        shoeUseCase.getDetailShoe(name)
-            .onEach { event ->
-                when (event) {
-                    is Resource.Loading -> {
-                        _state.value = state.value.copy(
-                            isLoading = true,
-                            detailShoe = event.data
-                        )
+        searchJob?.cancel()
+        searchJob = scope.launch() {
+            delay(500)
+            shoeUseCase.getDetailShoe(name)
+                .onEach { event ->
+                    when (event) {
+                        is Resource.Loading -> {
+                            _state.value = state.value.copy(
+                                isLoading = true,
+                                detailShoe = event.data
+                            )
+                        }
+                        is Resource.Success -> {
+                            _state.value = state.value.copy(
+                                isLoading = false,
+                                detailShoe = event.data
+                            )
+                        }
+                        is Resource.Error -> {
+                            _state.value = state.value.copy(
+                                isLoading = false,
+                                detailShoe = event.data,
+                                message = event.message
+                            )
+                        }
                     }
-                    is Resource.Success -> {
-                        _state.value = state.value.copy(
-                            isLoading = false,
-                            detailShoe = event.data
-                        )
-                    }
-                    is Resource.Error -> {
-                        _state.value = state.value.copy(
-                            isLoading = false,
-                            detailShoe = event.data,
-                            message = event.message
-                        )
-                    }
-                }
-            }.launchIn(viewModelScope)
+                }.launchIn(this)
+        }
     }
 
     fun changeFavorite(){

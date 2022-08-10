@@ -34,6 +34,8 @@ class DetailShoesFragment : Fragment() {
 
         if (bundle != null) {
             name = bundle.getString(HomeFragment.EXTRA_NAME).toString()
+            Timber.d("name : $name")
+            viewModel.getDetailShoe(name)
         }
     }
 
@@ -42,8 +44,6 @@ class DetailShoesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailShoesBinding.inflate(inflater, container, false)
-
-        viewModel.getDetailShoe(name)
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
