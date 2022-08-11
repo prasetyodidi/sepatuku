@@ -129,7 +129,7 @@ class ShoppingCartFragment : Fragment() {
 
     private fun showRv(items: List<CartItem>) {
         binding?.let {
-            adapter.setData(items)
+            adapter.setData(items.asReversed())
             it.rvCart.layoutManager = LinearLayoutManager(requireContext())
             it.rvCart.adapter = this.adapter
         }

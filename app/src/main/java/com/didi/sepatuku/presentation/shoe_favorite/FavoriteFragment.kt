@@ -108,7 +108,7 @@ class FavoriteFragment : Fragment() {
 
     private fun showRv(items: List<Shoe>) {
         binding?.let {
-            adapter.setData(items)
+            adapter.setData(items.asReversed())
             it.rvShoes.layoutManager = LinearLayoutManager(context)
             it.rvShoes.adapter = adapter
         }
