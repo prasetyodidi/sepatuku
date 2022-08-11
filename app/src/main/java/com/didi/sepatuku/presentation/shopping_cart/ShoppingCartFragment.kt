@@ -128,10 +128,19 @@ class ShoppingCartFragment : Fragment() {
     }
 
     private fun showRv(items: List<CartItem>) {
-        binding?.let {
-            adapter.setData(items.asReversed())
-            it.rvCart.layoutManager = LinearLayoutManager(requireContext())
-            it.rvCart.adapter = this.adapter
+        if (items.isEmpty()){
+            binding?.let {
+                it.imageEmpty.visibility = View.VISIBLE
+                it.rvCart.visibility = View.GONE
+            }
+        }else {
+            binding?.let {
+                adapter.setData(items.asReversed())
+                it.imageEmpty.visibility = View.GONE
+                it.rvCart.visibility = View.VISIBLE
+                it.rvCart.layoutManager = LinearLayoutManager(requireContext())
+                it.rvCart.adapter = this.adapter
+            }
         }
     }
 

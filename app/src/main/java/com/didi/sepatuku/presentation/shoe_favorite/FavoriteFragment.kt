@@ -107,10 +107,22 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showRv(items: List<Shoe>) {
-        binding?.let {
-            adapter.setData(items.asReversed())
-            it.rvShoes.layoutManager = LinearLayoutManager(context)
-            it.rvShoes.adapter = adapter
+        val x = items.isEmpty()
+        Timber.d("size items : ${items.size} $x")
+        if (items.isEmpty()){
+            binding?.let {
+                it.imageEmpty.visibility = View.VISIBLE
+                it.rvShoes.visibility = View.GONE
+            }
+        }else {
+
+            binding?.let {
+                adapter.setData(items.asReversed())
+                it.imageEmpty.visibility = View.GONE
+                it.rvShoes.visibility = View.VISIBLE
+                it.rvShoes.layoutManager = LinearLayoutManager(context)
+                it.rvShoes.adapter = adapter
+            }
         }
     }
 

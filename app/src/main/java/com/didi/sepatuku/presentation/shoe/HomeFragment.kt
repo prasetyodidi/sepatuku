@@ -106,10 +106,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun showRv(items: List<Shoe>) {
-        binding?.let {
-            adapter.setData(items)
-            it.rvShoes.layoutManager = LinearLayoutManager(requireContext())
-            it.rvShoes.adapter = this.adapter
+        if (items.isEmpty()){
+            binding?.let {
+                it.imageEmpty.visibility = View.VISIBLE
+                it.rvShoes.visibility = View.GONE
+            }
+        }else {
+            binding?.let {
+                adapter.setData(items)
+                it.imageEmpty.visibility = View.GONE
+                it.rvShoes.visibility = View.VISIBLE
+                it.rvShoes.layoutManager = LinearLayoutManager(requireContext())
+                it.rvShoes.adapter = this.adapter
+            }
         }
     }
 
