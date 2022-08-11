@@ -12,6 +12,20 @@ import org.junit.jupiter.api.Test
 internal class FavoriteUseCaseTest{
 
     @Test
+    fun `test insert favorite`() = runBlocking{
+        val item = Shoe(
+            "ab",
+            1,
+            "az"
+        )
+        assertDoesNotThrow {
+            runBlocking {
+                shoeFavoriteUseCase.insertFavorite(item)
+            }
+        }
+    }
+
+    @Test
     fun `test get all items`() = runBlocking{
         val items = shoeFavoriteUseCase.getFavorites().first()
         assertEquals(26, items.data?.size)
@@ -20,11 +34,12 @@ internal class FavoriteUseCaseTest{
     @Test
     fun `test delete item by name`() = runBlocking{
         val items1 = shoeFavoriteUseCase.getFavorites().first()
-        assertEquals(26, items1.data?.size)
+        assertNotNull(items1.data?.size)
+        val size: Int = items1.data!!.size
         shoeFavoriteUseCase.deleteFavorite("c")
         runBlocking {
             val items2 = shoeFavoriteUseCase.getFavorites().first()
-            assertEquals(25, items2.data?.size)
+            assertEquals(size-1, items2.data?.size)
         }
     }
 
