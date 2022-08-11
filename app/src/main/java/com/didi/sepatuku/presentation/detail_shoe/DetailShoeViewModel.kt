@@ -1,15 +1,18 @@
 package com.didi.sepatuku.presentation.detail_shoe
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.didi.sepatuku.core.util.Resource
 import com.didi.sepatuku.data.local.entity.ShoppingCartEntity
 import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.use_case.FavoriteUseCase
 import com.didi.sepatuku.domain.use_case.ShoeUseCase
 import com.didi.sepatuku.domain.use_case.ShoppingCartUseCase
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.sql.SQLException
 
 class DetailShoeViewModel constructor(
@@ -27,7 +30,6 @@ class DetailShoeViewModel constructor(
     fun getDetailShoe(name: String) {
         searchJob?.cancel()
         searchJob = scope.launch() {
-            delay(500)
             shoeUseCase.getDetailShoe(name)
                 .onEach { event ->
                     when (event) {
@@ -62,13 +64,13 @@ class DetailShoeViewModel constructor(
         )
         if (value){
             state.value.detailShoe?.let {
-                viewModelScope.launch {
+                scope.launch {
                     insertFavorite(it.intoShoe())
                 }
             }
         } else {
             state.value.detailShoe?.let {
-                viewModelScope.launch {
+                scope.launch {
                     deleteFavorite(it.name)
                 }
             }
@@ -96,10 +98,12 @@ class DetailShoeViewModel constructor(
     }
 
     fun insertShoppingCart(item: ShoppingCartEntity) {
-        viewModelScope.launch {
+        scope.launch {
             try {
                 shoppingCartUseCase.insertShoppingCartItem(item)
+                Timber.d("add cart")
             } catch (e: SQLException) {
+                Timber.d("error : $e")
                 _state.value = state.value.copy(
                     message = e.message
                 )
