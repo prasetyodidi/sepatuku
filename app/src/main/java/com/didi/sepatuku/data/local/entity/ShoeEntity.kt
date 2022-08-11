@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.didi.sepatuku.domain.model.DetailShoe
 import com.didi.sepatuku.domain.model.Shoe
 
 @Entity(

@@ -7,8 +7,9 @@ import com.didi.sepatuku.data.remote.ShoeApi
 import com.didi.sepatuku.domain.model.DetailShoe
 import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.repository.ShoeRepository
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -22,7 +23,6 @@ class ShoeRepositoryImpl(
 
         val shoes = shoeDao.getAllDetailShoes().map { it.intoShoe() }
         emit(Resource.Loading(data = shoes))
-        delay(2000)
 
         try {
             val remoteShoe = api.getAllShoes()

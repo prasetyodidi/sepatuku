@@ -1,8 +1,11 @@
 package com.didi.sepatuku.data.local.dao
 
-import androidx.room.*
-import com.didi.sepatuku.data.local.entity.ShoeWithSize
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Transaction
 import com.didi.sepatuku.data.local.entity.ShoeEntity
+import com.didi.sepatuku.data.local.entity.ShoeWithSize
 import com.didi.sepatuku.data.local.entity.SizeEntity
 import kotlinx.coroutines.flow.Flow
 

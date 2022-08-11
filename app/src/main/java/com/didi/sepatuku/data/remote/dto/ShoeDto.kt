@@ -1,7 +1,7 @@
 package com.didi.sepatuku.data.remote.dto
 
-import com.didi.sepatuku.data.local.entity.ShoeWithSize
 import com.didi.sepatuku.data.local.entity.ShoeEntity
+import com.didi.sepatuku.data.local.entity.ShoeWithSize
 import com.didi.sepatuku.data.local.entity.SizeEntity
 
 data class ShoeDto(
