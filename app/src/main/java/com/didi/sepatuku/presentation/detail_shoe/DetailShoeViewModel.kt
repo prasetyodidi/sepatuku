@@ -59,6 +59,7 @@ class DetailShoeViewModel constructor(
 
     fun changeFavorite(){
         val value = !state.value.isFavorite
+        Timber.d("change favorite $value")
         _state.value = state.value.copy(
             isFavorite = value
         )
