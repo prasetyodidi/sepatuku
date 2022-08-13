@@ -8,6 +8,8 @@ import com.didi.sepatuku.MainActivity
 import com.didi.sepatuku.R
 
 class SplashActivity : AppCompatActivity() {
+    private val splashScreenTime: Long = 1000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -15,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         Handler(mainLooper).postDelayed({
             Intent(this@SplashActivity, MainActivity::class.java).also { startActivity(it) }
             finish()
-        }, 1000)
+        }, splashScreenTime)
 
     }
 }
