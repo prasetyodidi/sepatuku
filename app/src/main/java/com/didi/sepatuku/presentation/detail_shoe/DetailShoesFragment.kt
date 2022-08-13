@@ -95,8 +95,6 @@ class DetailShoesFragment : Fragment() {
 
         binding?.btnAddItem?.setOnClickListener {
             val dialog = DetailCartDialogFragment.newInstance()
-//            val behavior = (dialog.dialog as BottomSheetDialog).behavior
-//            behavior.saveFlags = BottomSheetBehavior.SAVE_PEEK_HEIGHT
             dialog.show(parentFragmentManager, EXTRA_DIALOG)
         }
         binding?.btnFavorite?.setOnClickListener {
@@ -124,7 +122,7 @@ class DetailShoesFragment : Fragment() {
                 .load(detailShoe.imageUrl)
                 .into(imgItemPhotoDetail)
 
-            tvShoesPrice.text = "Rp. ${detailShoe.price}"
+            tvShoesPrice.text = getString(R.string.currency).plus(detailShoe.price)
             tvShoesName.text = detailShoe.name
             tvShoesDesc.text = detailShoe.desc
             Timber.d("sizes: ${detailShoe.sizes}")
