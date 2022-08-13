@@ -13,6 +13,8 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.didi.sepatuku.presentation.ShoesAdapter
 import com.didi.sepatuku.presentation.shopping_cart.ShoppingCartAdapter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matcher
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
@@ -169,11 +171,13 @@ internal class MainActivityTest {
 
     @Test
     @Disabled("Done")
-    fun testRemoveCartItem() {
+    fun testRemoveCartItem(): Unit = runBlocking {
         // click action cart
         Espresso
             .onView(withId(R.id.action_cart))
             .perform(click())
+
+        delay(500)
 
         // find cart item with specific shoe name and click button trash
         Espresso.onView(withId(R.id.rv_cart))
@@ -184,14 +188,17 @@ internal class MainActivityTest {
                 )
             )
 
+        delay(500)
+
         Espresso.onView(withText("delete"))
             .perform(click())
 
     }
 
     @Test
-    fun testAddAndRemoveCartItem(){
+    fun testAddAndRemoveCartItem() = runBlocking{
         testAddCartItem()
+        delay(500)
         testRemoveCartItem()
     }
 
