@@ -23,7 +23,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ShoeApp : Application(){
-    val appModule = module {
+    private val appModule = module {
 
         fun provideShoppingCarUseCase(repository: ShoppingCartRepository): ShoppingCartUseCase{
             return ShoppingCartUseCase(
@@ -81,14 +81,14 @@ class ShoeApp : Application(){
         single { FavoriteViewModel(get()) }
         single { DetailShoeViewModel(get(), get(), get()) }
         single { ShoeViewModel(get()) }
-        single<ShoppingCartUseCase> { provideShoppingCarUseCase(get()) }
-        single<FavoriteUseCase> { provideShoeFavoriteUseCase(get()) }
-        single<ShoeUseCase> { provideShoeUseCase(get()) }
-        single<ShoppingCartRepository> { provideShoppingCartRepository(get()) }
-        single<ShoeFavoriteRepository> { provideShoeFavoriteRepository(get()) }
-        single<ShoeRepository> { provideShoeRepository(get(), get()) }
-        single<AppDatabase> { provideAppDatabase() }
-        single<ShoeApi> { provideShoeApi() }
+        single { provideShoppingCarUseCase(get()) }
+        single { provideShoeFavoriteUseCase(get()) }
+        single { provideShoeUseCase(get()) }
+        single { provideShoppingCartRepository(get()) }
+        single { provideShoeFavoriteRepository(get()) }
+        single { provideShoeRepository(get(), get()) }
+        single { provideAppDatabase() }
+        single { provideShoeApi() }
     }
 
 

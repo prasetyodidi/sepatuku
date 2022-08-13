@@ -1,10 +1,11 @@
 package com.didi.sepatuku.presentation.shoe_favorite
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.didi.sepatuku.core.util.Resource
 import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.use_case.FavoriteUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
 
@@ -15,10 +16,12 @@ data class FavoriteUIState(
 )
 
 class FavoriteViewModel constructor(
-    private val favoriteUseCase: FavoriteUseCase
+    favoriteUseCase: FavoriteUseCase
 ): ViewModel(){
     private var _state: MutableStateFlow<FavoriteUIState> = MutableStateFlow(FavoriteUIState())
     val state: StateFlow<FavoriteUIState> = _state.asStateFlow()
+
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     init {
         Timber.d("fav view model")
@@ -47,22 +50,7 @@ class FavoriteViewModel constructor(
                         )
                     }
                 }
-            }.launchIn(viewModelScope)
+            }.launchIn(scope)
     }
-
-
-//    var favoritesItems: LiveData<List<FavoriteEntity>> = favoriteRepository.favorites.asLiveData()
-//    private fun launchDataLoad(scope: CoroutineScope, block: suspend () -> Unit): Job{
-//        return scope.launch {
-//            try {
-//                _isLoading.value = true
-//                block
-//            } catch (e: Throwable) {
-//                _snackbar.value = e.message
-//            } finally {
-//                _isLoading.value = false
-//            }
-//        }
-//    }
 
 }
