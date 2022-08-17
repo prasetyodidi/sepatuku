@@ -1,12 +1,11 @@
 package com.didi.sepatuku.presentation.shopping_cart
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.didi.sepatuku.core.util.Resource
 import com.didi.sepatuku.domain.model.CartItem
 import com.didi.sepatuku.domain.use_case.ShoppingCartUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -25,7 +24,7 @@ class ShoppingCartViewModel constructor(
         MutableStateFlow(ShoppingCartUiState())
     val state: StateFlow<ShoppingCartUiState> = _state.asStateFlow()
 
-    val stateTest: LiveData<Resource<List<CartItem>>> = shoppingCartUseCase.getShoppingCartItems().asLiveData()
+    val scope = CoroutineScope(Dispatchers.IO)
 
     init {
         getData()
@@ -54,11 +53,11 @@ class ShoppingCartViewModel constructor(
                         )
                     }
                 }
-            }.launchIn(viewModelScope)
+            }.launchIn(scope)
     }
 
     fun deleteItemFromShoppingCart(item: CartItem){
-        viewModelScope.launch {
+        scope.launch {
             Timber.d("viewModel noDelete:  ${item.name}")
             shoppingCartUseCase.deleteShoppingCartItem(item)
             getData()
@@ -66,7 +65,7 @@ class ShoppingCartViewModel constructor(
     }
 
     fun updateAmount(item: CartItem, amount: Int){
-        viewModelScope.launch {
+        scope.launch {
             if (amount >= 1){
                 Timber.d("viewModel onUpdate amount: ${item.amount} $amount")
                 shoppingCartUseCase.updateShoppingCartItem(item.copy(amount = amount))

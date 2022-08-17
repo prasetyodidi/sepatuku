@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
+import com.didi.sepatuku.R
 import com.didi.sepatuku.data.local.entity.ShoppingCartEntity
 import com.didi.sepatuku.databinding.FragmentDetailCartDialogBinding
 import com.didi.sepatuku.domain.model.DetailShoe
@@ -31,7 +32,6 @@ class DetailCartDialogFragment : BottomSheetDialogFragment() {
 
         val behavior = BottomSheetBehavior.from(requireView().parent as View)
         behavior.saveFlags = BottomSheetBehavior.SAVE_PEEK_HEIGHT
-//        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +72,7 @@ class DetailCartDialogFragment : BottomSheetDialogFragment() {
     }
     private fun showData(data: DetailShoe){
         binding?.run {
-            tvPrice.text = "Rp ${data.price}"
+            tvPrice.text = getString(R.string.currency).plus(data.price)
             tvStock.text = data.stock.toString()
             Glide.with(requireContext())
                 .load(data.imageUrl)

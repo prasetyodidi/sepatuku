@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Timber.plant(Timber.DebugTree())
+        if(BuildConfig.DEBUG){
+            Timber.plant(Timber.DebugTree())
+        }
 
         binding.bottomNavigation.selectedItemId = R.id.action_home
         fragment = HomeFragment.newInstance()

@@ -10,7 +10,6 @@ import timber.log.Timber
 class ShoeViewModel constructor(
     private val shoeUseCase: ShoeUseCase
 ) : ViewModel() {
-
     private var _stateFlow: MutableStateFlow<ShoeUIState> = MutableStateFlow(ShoeUIState())
     val stateFlow: StateFlow<ShoeUIState> = _stateFlow.asStateFlow()
 

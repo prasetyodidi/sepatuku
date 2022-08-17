@@ -4,8 +4,7 @@ import com.didi.sepatuku.core.util.Resource
 import com.didi.sepatuku.data.local.dao.FavoriteDao
 import com.didi.sepatuku.domain.model.Shoe
 import com.didi.sepatuku.domain.repository.ShoeFavoriteRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import timber.log.Timber
 import java.sql.SQLException
 
@@ -25,9 +24,12 @@ class ShoeFavoriteRepositoryImpl(
 
         val favorites = dao.getAll()
 
-        favorites.collect { items ->
-            emit(Resource.Success(items.map { it.intoShoe() }))
-        }
+        favorites
+            .distinctUntilChanged()
+            .collect { items ->
+                emit(Resource.Success(items.map { it.intoShoe() }))
+
+            }
     }
 
     override suspend fun deleteFavoriteItemByName(name: String) {
