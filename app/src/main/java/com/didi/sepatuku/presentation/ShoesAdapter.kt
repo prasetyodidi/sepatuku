@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.didi.sepatuku.core.util.Helper.Companion.loadImage
 import com.didi.sepatuku.databinding.ItemShoeBinding
 import com.didi.sepatuku.domain.model.Shoe
-import timber.log.Timber
 
 class ShoesAdapter : RecyclerView.Adapter<ShoesAdapter.ShoeViewHolder>() {
     private var listItems: MutableList<Shoe> = mutableListOf()
@@ -18,9 +17,6 @@ class ShoesAdapter : RecyclerView.Adapter<ShoesAdapter.ShoeViewHolder>() {
     }
 
     fun setData(items: List<Shoe>) {
-        if (items.isNotEmpty()) {
-            Timber.d("set data ${items.size} ${items[0].name}")
-        }
         val diffCallback = ShoeDiffCallback(this.listItems, items)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.listItems.clear()
@@ -39,9 +35,7 @@ class ShoesAdapter : RecyclerView.Adapter<ShoesAdapter.ShoeViewHolder>() {
             binding.apply {
                 tvItemName.text = item.name
                 tvItemPrice.text = item.price.toString()
-                Glide.with(this@ShoeViewHolder.itemView.context)
-                    .load(item.imageUrl)
-                    .into(imgItemPhoto)
+                imgItemPhoto.loadImage(item.imageUrl)
             }
             this.itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(item)

@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.didi.sepatuku.R
+import com.didi.sepatuku.core.util.Helper.Companion.loadImage
 import com.didi.sepatuku.databinding.FragmentDetailShoesBinding
 import com.didi.sepatuku.domain.model.DetailShoe
 import com.didi.sepatuku.presentation.shoe.HomeFragment
@@ -19,7 +21,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class DetailShoesFragment : Fragment() {
     private var _binding: FragmentDetailShoesBinding? = null
@@ -34,7 +35,6 @@ class DetailShoesFragment : Fragment() {
 
         if (bundle != null) {
             name = bundle.getString(HomeFragment.EXTRA_NAME).toString()
-            Timber.d("name : $name")
             viewModel.getDetailShoe(name)
         }
     }
@@ -94,14 +94,23 @@ class DetailShoesFragment : Fragment() {
         }
 
         binding?.btnAddItem?.setOnClickListener {
-            val dialog = DetailCartDialogFragment.newInstance()
-            dialog.show(parentFragmentManager, EXTRA_DIALOG)
+            val f = DetailCartDialogFragment.newInstance()
+            parentFragmentManager.commit {
+                setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+                add(R.id.frame_container, f)
+                addToBackStack(null)
+            }
         }
+
         binding?.btnFavorite?.setOnClickListener {
             viewModel.changeFavorite()
         }
         binding?.btnShare?.setOnClickListener {
-            Timber.d("shared!")
             Toast.makeText(activity, "Click icon Share ", Toast.LENGTH_SHORT).show()
         }
 
@@ -118,14 +127,11 @@ class DetailShoesFragment : Fragment() {
 
     private fun showShoeInfo(detailShoe: DetailShoe) {
         binding?.run {
-            Glide.with(requireContext())
-                .load(detailShoe.imageUrl)
-                .into(imgItemPhotoDetail)
+            imgItemPhotoDetail.loadImage(detailShoe.imageUrl)
 
             tvShoesPrice.text = getString(R.string.currency).plus(detailShoe.price)
             tvShoesName.text = detailShoe.name
             tvShoesDesc.text = detailShoe.desc
-            Timber.d("sizes: ${detailShoe.sizes}")
             tvShoesSizes.text = detailShoe.sizes.toString()
             tvShoesStock.text = detailShoe.stock.toString()
             showFavorite(detailShoe.isFavorite)
@@ -152,7 +158,6 @@ class DetailShoesFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = DetailShoesFragment()
-        const val EXTRA_DIALOG = "extra_dialog"
     }
 }
 

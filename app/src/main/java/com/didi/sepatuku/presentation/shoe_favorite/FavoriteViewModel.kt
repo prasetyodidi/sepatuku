@@ -24,26 +24,22 @@ class FavoriteViewModel constructor(
     private val scope = CoroutineScope(Dispatchers.IO)
 
     init {
-        Timber.d("fav view model")
         favoriteUseCase.getFavorites()
             .onEach { event ->
                 when(event){
                     is Resource.Loading -> {
-                        Timber.d("fav view model loading : ${event.data?.size}")
                         _state.value = state.value.copy(
                             isLoading = true,
                             items = event.data ?: emptyList()
                         )
                     }
                     is Resource.Success -> {
-                        Timber.d("fav view model success : ${event.data?.size}")
                         _state.value = state.value.copy(
                             isLoading = false,
                             items = event.data ?: emptyList()
                         )
                     }
                     is Resource.Error -> {
-                        Timber.d("fav view model error : ${event.data?.size}")
                         _state.value = state.value.copy(
                             isLoading = false,
                             message = event.message ?: "unknown error"

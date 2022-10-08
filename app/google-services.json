@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "280995547901",
+    "project_id": "sepatu-app-bd2a2",
+    "storage_bucket": "sepatu-app-bd2a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280995547901:android:704328f65a944b80c0cc94",
+        "android_client_info": {
+          "package_name": "com.didi.sepatuku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280995547901-ocu55f016vh92pdmaa93q3jvs9trmjio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoFToORkW-g8oTB5d-TgOdPVsPi3JsPYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280995547901-ocu55f016vh92pdmaa93q3jvs9trmjio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

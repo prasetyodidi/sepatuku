@@ -5,15 +5,17 @@ plugins {
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs'
     id 'de.mannodermaus.android-junit5'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.didi.sepatuku"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -45,16 +47,23 @@ android {
 
 dependencies {
 
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:30.3.2')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion")
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation "androidx.fragment:fragment-ktx:1.5.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.3"
 
     // Espreso
     implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
@@ -67,8 +76,8 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$navigationVersion"
@@ -101,21 +110,21 @@ dependencies {
     testImplementation "io.insert-koin:koin-test:$koinVersion"
     testImplementation "io.insert-koin:koin-test-junit4:$koinVersion"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.2"
-    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.8.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$junitVersion"
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
     // (Optional) If you need "Parameterized Tests"
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
 
     // (Optional) If you also have JUnit 4-based tests
     testImplementation("junit:junit:4.13.2")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion")
 
     // Local unit test
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
@@ -127,8 +136,8 @@ dependencies {
     testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.5.1'
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.8.0'
     testImplementation 'org.mockito:mockito-inline:3.6.0'
     androidTestImplementation("androidx.navigation:navigation-testing:$navigationVersion")
 
@@ -137,7 +146,7 @@ dependencies {
     androidTestRuntimeOnly("de.mannodermaus.junit5:android-test-runner:1.2.2")
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation "androidx.test:core:1.5.0-alpha01"
+    androidTestImplementation "androidx.test:core:1.5.0-beta01"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation ("androidx.test.espresso:espresso-contrib:$espressoVersion")
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"

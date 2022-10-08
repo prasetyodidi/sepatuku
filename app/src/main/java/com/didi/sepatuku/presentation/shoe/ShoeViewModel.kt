@@ -22,27 +22,23 @@ class ShoeViewModel constructor(
             .onEach { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        Timber.d("Loading ${result.data?.size}")
                         _stateFlow.value = stateFlow.value.copy(
                             shoeItems = result.data ?: emptyList(),
                             isLoading = true
                         )
                     }
                     is Resource.Success -> {
-                        Timber.d("success ${result.data?.size}")
                         _stateFlow.value = stateFlow.value.copy(
                             shoeItems = result.data ?: emptyList(),
                             isLoading = false
                         )
                     }
                     is Resource.Error -> {
-                        Timber.d("Error ${result.data?.size}")
                         _stateFlow.value = stateFlow.value.copy(
                             shoeItems = result.data ?: emptyList(),
                             isLoading = false,
                             message = result.message ?: "unknown error"
                         )
-                        Timber.d("emit error ${result.message}")
                     }
                 }
             }.launchIn(viewModelScope)

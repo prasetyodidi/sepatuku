@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class ShoppingCartFragment : Fragment() {
     private var _binding: FragmentShoppingCartBinding? = null
@@ -76,7 +75,6 @@ class ShoppingCartFragment : Fragment() {
                     .map { it.items }
                     .distinctUntilChanged()
                     .collect {
-                        Timber.d("shopping cart sizes : ${it.size}")
                         showRv(it)
                     }
             }
@@ -90,7 +88,6 @@ class ShoppingCartFragment : Fragment() {
                         dialog.dismiss()
                     }
                     .setPositiveButton("delete"){ _, _ ->
-                        Timber.d("onDelete ${item.name}")
                         viewModel.deleteItemFromShoppingCart(item)
                     }
                     .show()
@@ -109,7 +106,6 @@ class ShoppingCartFragment : Fragment() {
             }
 
             override fun onAmountChangeCallback(item: CartItem, amount: Int) {
-                Timber.d("amount change $amount")
                 viewModel.updateAmount(item, amount)
             }
         })

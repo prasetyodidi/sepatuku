@@ -12,11 +12,7 @@ class ShoeFavoriteRepositoryImpl(
     private val dao: FavoriteDao
 ): ShoeFavoriteRepository {
     override suspend fun insertNewFavorite(item: Shoe) {
-        try {
-            dao.insert(item.intoFavoriteEntity())
-        } catch (e: SQLException){
-            Timber.d("error : ${e.message}")
-        }
+        dao.insert(item.intoFavoriteEntity())
     }
 
     override fun getAllFavorites(): Flow<Resource<List<Shoe>>> = flow {
