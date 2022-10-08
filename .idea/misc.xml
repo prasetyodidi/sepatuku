@@ -48,6 +48,15 @@
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/menu/menu_bottom_nav_view.xml" value="0.17824074074074073" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/menu/menu_top_nav.xml" value="0.15601851851851853" />
         <entry key="..\:/latihan/kotlin/AndroidStudioProject/submission dicoding/sepatuku/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18995433789954339" />
+        <entry key="app/src/main/res/drawable/splash_brand_logo.xml" value="0.1445" />
+        <entry key="app/src/main/res/layout-v26/item_shoe.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_detail_cart_dialog.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/fragment_detail_shoes.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_shopping_cart.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/item_shopping_cart.xml" value="0.2" />
       </map>
     </option>
   </component>

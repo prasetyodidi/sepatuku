@@ -8,7 +8,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 data class ShoppingCartUiState(
     val isLoading: Boolean = false,
@@ -58,7 +57,6 @@ class ShoppingCartViewModel constructor(
 
     fun deleteItemFromShoppingCart(item: CartItem){
         scope.launch {
-            Timber.d("viewModel noDelete:  ${item.name}")
             shoppingCartUseCase.deleteShoppingCartItem(item)
             getData()
         }
@@ -67,7 +65,6 @@ class ShoppingCartViewModel constructor(
     fun updateAmount(item: CartItem, amount: Int){
         scope.launch {
             if (amount >= 1){
-                Timber.d("viewModel onUpdate amount: ${item.amount} $amount")
                 shoppingCartUseCase.updateShoppingCartItem(item.copy(amount = amount))
                 getData()
             }

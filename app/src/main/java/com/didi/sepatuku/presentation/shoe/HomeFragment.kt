@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -62,7 +61,6 @@ class HomeFragment : Fragment() {
                     .map { it.shoeItems }
                     .distinctUntilChanged()
                     .collect { items ->
-                        Timber.d("items: ${items.size}")
                         showRv(items)
                     }
             }
@@ -73,7 +71,6 @@ class HomeFragment : Fragment() {
                     .map { it.isLoading }
                     .distinctUntilChanged()
                     .collect {
-                        Timber.d("isLoading : $it")
                         showLoading(it)
                     }
             }
@@ -84,7 +81,6 @@ class HomeFragment : Fragment() {
                     .map { it.message }
                     .distinctUntilChanged()
                     .collect { message ->
-                        Timber.d("receive error")
                         if (message.isNotBlank()){
                             showSnackbar(message)
                         }
@@ -129,7 +125,7 @@ class HomeFragment : Fragment() {
             bundle.putString(EXTRA_NAME, name)
             fragment.arguments = bundle
             replace(R.id.frame_container, fragment)
-            addToBackStack(null)
+//            addToBackStack(null)
         }
     }
 

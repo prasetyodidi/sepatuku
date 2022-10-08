@@ -47,8 +47,6 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Timber.d("favorite fragment created")
-
         binding?.rvShoes?.setHasFixedSize(true)
 
         adapter.setOnItemClickCallback(object : ShoesAdapter.OnItemClickCallback{
@@ -87,7 +85,6 @@ class FavoriteFragment : Fragment() {
                     .map { it.items }
                     .distinctUntilChanged()
                     .collect {
-                        Timber.d("fav sizes : ${it.size}")
                         showRv(it)
                     }
             }
@@ -107,8 +104,6 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showRv(items: List<Shoe>) {
-        val x = items.isEmpty()
-        Timber.d("size items : ${items.size} $x")
         if (items.isEmpty()){
             binding?.let {
                 it.imageEmpty.visibility = View.VISIBLE

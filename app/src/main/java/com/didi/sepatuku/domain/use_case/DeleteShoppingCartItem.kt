@@ -8,7 +8,6 @@ class DeleteShoppingCartItem(
     private val repository: ShoppingCartRepository
 ) {
     suspend operator fun invoke(item: CartItem){
-        Timber.d("useCase onDelete : ${item.name}")
         repository.deleteItem(item)
     }
 }

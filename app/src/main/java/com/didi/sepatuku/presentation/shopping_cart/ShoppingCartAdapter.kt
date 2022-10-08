@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.didi.sepatuku.R
+import com.didi.sepatuku.core.util.Helper.Companion.loadImage
 import com.didi.sepatuku.databinding.ItemShoppingCartBinding
 import com.didi.sepatuku.domain.model.CartItem
 import timber.log.Timber
@@ -34,10 +35,7 @@ class ShoppingCartAdapter : RecyclerView.Adapter<ShoppingCartAdapter.ListViewHol
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CartItem) {
             with(binding) {
-                Glide.with(this@ListViewHolder.itemView.context)
-                    .load(item.imageUrl)
-                    .apply(RequestOptions().override(104, 104))
-                    .into(imgItem)
+                imgItem.loadImage(item.imageUrl)
 
                 textViewName.text = item.name
                 textViewType.text = item.type
@@ -49,16 +47,17 @@ class ShoppingCartAdapter : RecyclerView.Adapter<ShoppingCartAdapter.ListViewHol
                 }
                 tvAmount.doAfterTextChanged { text ->
                     var amount = 1
-                    try {
-                        amount = text.toString().toInt()
-                    } catch (e: Throwable) {
-                        Timber.d("error $text ${e.message}")
-                    } finally {
-                        if (amount > 1) {
-                            Timber.d("onChange ${item.name} ${item.amount} ")
-                            onItemCallback?.onAmountChangeCallback(item, amount)
-                        } else {
-                            tvAmount.setText("1")
+                    if (text.isNullOrBlank()){
+                        try {
+                            amount = text.toString().toInt()
+                        } catch (e: Throwable) {
+                            Timber.d("error $text ${e.message}")
+                        } finally {
+                            if (amount > 1) {
+                                onItemCallback?.onAmountChangeCallback(item, amount)
+                            } else {
+                                tvAmount.setText("1")
+                            }
                         }
                     }
                 }
